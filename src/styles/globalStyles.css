@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #7fb5b5;
+  --color-primary: #48bcbc;
+  --color-primary-dark: #51afaf;
+}
+
+.loader {
+  width: 60px;
+  aspect-ratio: 0.5;
+  display: grid;
+}
+.loader:before {
+  content: "";
+  width: 30%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  margin: auto auto 0;
+  background: #888888;
+  animation: l9-0 0.5s cubic-bezier(0, 800, 1, 800) infinite;
+}
+.loader:after {
+  content: "";
+  width: 100%;
+  aspect-ratio: 1 / cos(30deg);
+  margin: 0 auto auto;
+  clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%);
+  background: var(--color-primary);
+  animation: l9-1 0.5s linear infinite;
+}
+@keyframes l9-0 {
+  0%,
+  2% {
+    translate: 0 0%;
+  }
+  98%,
+  to {
+    translate: 0 -0.2%;
+  }
+}
+@keyframes l9-1 {
+  0%,
+  5% {
+    rotate: 0deg;
+  }
+  95%,
+  to {
+    rotate: -60deg;
+  }
+}
+
+/* HTML: <div class="loader"></div> */
+.spinner {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  border: 4px solid #0000;
+  border-radius: 50%;
+  border-right-color: #25b09b;
+  animation: l15 1s infinite linear;
+}
+.spinner::before,
+.spinner::after {
+  content: "";
+  grid-area: 1/1;
+  margin: 2px;
+  border: inherit;
+  border-radius: 50%;
+  animation: l15 2s infinite;
+}
+.spinner::after {
+  margin: 8px;
+  animation-duration: 3s;
+}
+@keyframes l15 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
