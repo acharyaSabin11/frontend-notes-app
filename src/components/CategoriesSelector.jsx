@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import AddCategory from "./AddCategory";
 
 export default function CategoriesSelector({
   categories = [
@@ -15,6 +16,10 @@ export default function CategoriesSelector({
   ],
   register,
   setValue,
+  formState,
+  allowSubmit,
+  setAllowSubmit,
+  watch,
 }) {
   const [selectedCategories, setSelectedCategories] = useState([]);
 
@@ -25,7 +30,6 @@ export default function CategoriesSelector({
     );
   }, [selectedCategories, setValue]);
 
-  console.log(selectedCategories);
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-2xl font-semibold">Categories</h2>
@@ -40,6 +44,15 @@ export default function CategoriesSelector({
             />
           ))}
         </ul>
+        <AddCategory
+          register={register("newCategory", {
+            required: "Category name is required",
+          })}
+          formState={formState}
+          allowSubmit={allowSubmit}
+          setAllowSubmit={setAllowSubmit}
+          watch={watch}
+        />
       </div>
       <input type="hidden" {...register("categories")} />
     </div>

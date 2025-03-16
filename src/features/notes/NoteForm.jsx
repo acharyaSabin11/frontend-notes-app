@@ -2,10 +2,11 @@ import { useForm } from "react-hook-form";
 import AppInput from "../../components/AppInput";
 import CategoriesSelector from "../../components/CategoriesSelector";
 import AppButton from "../../components/AppButton";
+import { useState } from "react";
 
 export default function NoteForm() {
-  const { register, handleSubmit, setValue } = useForm();
-
+  const { register, handleSubmit, setValue, formState, watch } = useForm();
+  const [allowSubmit, setAllowSubmit] = useState(true);
   const sumbitHandler = (data) => {
     console.log(data);
   };
@@ -22,8 +23,15 @@ export default function NoteForm() {
         title="Additional Info"
         register={register("additional_info")}
       />
-      <CategoriesSelector register={register} setValue={setValue} />
-      <AppButton>Save</AppButton>
+      <CategoriesSelector
+        register={register}
+        setValue={setValue}
+        formState={formState}
+        allowSubmit={allowSubmit}
+        setAllowSubmit={setAllowSubmit}
+        watch={watch}
+      />
+      <AppButton disabled={!allowSubmit}>Save</AppButton>
     </form>
   );
 }

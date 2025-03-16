@@ -13,3 +13,16 @@ export const getRecentCategories = async () => {
     }
     return response.data.data.categories ?? [];
 };
+
+export const addCategory = async ({ category }) => {
+    const response = await client.post("/categories", {
+        title: category,
+    });
+
+    if (response.status !== 201) {
+        console.log(response);
+        throw new Error("Something went wrong");
+    }
+    console.log(response);
+    return response.data.category;
+}

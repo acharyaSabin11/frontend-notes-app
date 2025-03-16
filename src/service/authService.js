@@ -12,8 +12,6 @@ export const signup = async ({ username, password }) => {
 };
 
 export const refreshTokens = async () => {
-    //add delay of 2 seconds
-    await new Promise((resolve) => setTimeout(resolve, 2000));
     const response = await client.post("/refresh");
     return response.data;
 }
