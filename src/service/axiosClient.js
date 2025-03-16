@@ -39,14 +39,14 @@ function createAxiosResponseInterceptor() {
             client.interceptors.response.eject(interceptor);
             return client.post("/refresh").then((response) => {
                 if (response.status !== 200) {
-                    return Promise.reject(error);
+                    throw new Error("Failed to refresh token");
                 }
                 store.dispatch(handleLogin(response.data));
                 error.response.config.headers["Authorization"] = `Bearer ${response.data.accessToken}`;
                 return client(error.response.config);
             }).catch((err) => {
                 return Promise.reject(err);
-            }).finally(createAxiosResponseInterceptor);
+            }).finally(createAxiosResponseInterceptor());
 
         }
     );

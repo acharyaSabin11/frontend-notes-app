@@ -55,7 +55,7 @@ export default function NoteForm({ close }) {
         register={register}
         setValue={setValue}
         formState={formState}
-        allowSubmit={allowSubmit || !isCreatingNote}
+        allowSubmit={allowSubmit}
         setAllowSubmit={setAllowSubmit}
         watch={watch}
         isGettingCategories={isGettingCategories}

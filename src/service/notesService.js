@@ -38,3 +38,14 @@ export const getNoteDetail = async (noteId) => {
     }
     return response.data.data;
 }
+
+export const deleteNote = async (noteId) => {
+    console.log(noteId);
+    const response = await client.delete(`/notes/${noteId}`);
+
+    if (response.status !== 204) {
+        console.log(response);
+        throw new Error("Something went wrong");
+    }
+    return response.data;
+}
