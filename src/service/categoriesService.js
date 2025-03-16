@@ -1,7 +1,7 @@
 import client from "./axiosClient";
 
 export const getRecentCategories = async () => {
-    const response = await client.get("/categories", {
+    const response = await client.get("/categories/recent", {
         params: {
             limit: 5,
         },
@@ -24,4 +24,15 @@ export const addCategory = async ({ category }) => {
         throw new Error("Something went wrong");
     }
     return response.data.category;
+}
+
+export const getCategories = async () => {
+    const response = await client.get("/categories");
+
+    if (response.status !== 200) {
+        console.log(response);
+        throw new Error("Something went wrong");
+    }
+    console.log(response);
+    return response.data.categories ?? [];
 }

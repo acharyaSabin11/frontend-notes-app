@@ -1,25 +1,16 @@
 import { useEffect, useState } from "react";
 import AddCategory from "./AddCategory";
+import Spinner from "./spinner";
 
 export default function CategoriesSelector({
-  categories = [
-    { name: "Work", id: "work" },
-    { name: "Personal", id: "personal" },
-    { name: "Ideas", id: "ideas" },
-    { name: "Projects", id: "projects" },
-    { name: "Study", id: "study" },
-    { name: "Health", id: "health" },
-    { name: "Finance", id: "finance" },
-    { name: "Travel", id: "travel" },
-    { name: "Shopping", id: "shopping" },
-    { name: "Miscellaneous", id: "misc" },
-  ],
+  categories,
   register,
   setValue,
   formState,
   allowSubmit,
   setAllowSubmit,
   watch,
+  isGettingCategories,
 }) {
   const [selectedCategories, setSelectedCategories] = useState([]);
 
@@ -33,28 +24,30 @@ export default function CategoriesSelector({
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-2xl font-semibold">Categories</h2>
-      <div className="flex flex-col gap-2 items-start">
-        <ul className="flex flex-wrap gap-2 ">
-          {categories.map((category) => (
-            <Category
-              key={category.id}
-              category={category}
-              selectedCategories={selectedCategories}
-              setSelectedCategories={setSelectedCategories}
-            />
-          ))}
-        </ul>
-        <AddCategory
-          register={register("newCategory", {
-            required: "Category name is required",
-          })}
-          formState={formState}
-          allowSubmit={allowSubmit}
-          setAllowSubmit={setAllowSubmit}
-          watch={watch}
-          setValue={setValue}
-        />
-      </div>
+      {isGettingCategories ? (
+        <Spinner />
+      ) : categories.length !== 0 ? (
+        <div className="flex flex-col gap-2 items-start">
+          <ul className="flex flex-wrap gap-2 ">
+            {categories.map((category) => (
+              <Category
+                key={category.id}
+                category={category}
+                selectedCategories={selectedCategories}
+                setSelectedCategories={setSelectedCategories}
+              />
+            ))}
+          </ul>
+          <AddCategory
+            register={register("newCategory")}
+            formState={formState}
+            allowSubmit={allowSubmit}
+            setAllowSubmit={setAllowSubmit}
+            watch={watch}
+            setValue={setValue}
+          />
+        </div>
+      ) : null}
       <input type="hidden" {...register("categories")} />
     </div>
   );
@@ -79,7 +72,7 @@ function Category({ category, selectedCategories, setSelectedCategories }) {
         }
       }}
     >
-      {category.name}
+      {category.title}
     </button>
   );
 }

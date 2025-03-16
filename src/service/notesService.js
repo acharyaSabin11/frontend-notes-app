@@ -13,3 +13,18 @@ export const getRecentNotes = async () => {
     }
     return response.data.data.notes;
 };
+
+export const addNote = async ({ title, description, additional_info, categories }) => {
+    const response = await client.post("/notes", {
+        title,
+        description,
+        additional_info,
+        categories,
+    });
+
+    if (response.status !== 201) {
+        console.log(response);
+        throw new Error("Something went wrong");
+    }
+    return response.data.note;
+}

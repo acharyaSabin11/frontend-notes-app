@@ -16,7 +16,7 @@ export default function DashboardPage() {
       <h2 className="text-2xl font-semibold self-start">Hi, {username}</h2>
       {modelOpen == "notes" && (
         <ModalWindow onClose={() => setModelOpen(false)}>
-          <NoteForm />
+          <NoteForm close={() => setModelOpen(false)} />
         </ModalWindow>
       )}
       {modelOpen == "categories" && (
