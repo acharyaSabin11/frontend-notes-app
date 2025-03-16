@@ -12,7 +12,7 @@ export default function useCreateCategory() {
             toast.success("Category added successfully");
         }, onError: (error) => {
             console.error(error);
-            toast.error("Failed to add category");
+            toast.error(error.response.data.message);
         }
     });
 

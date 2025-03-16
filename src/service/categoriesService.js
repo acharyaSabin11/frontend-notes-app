@@ -21,7 +21,7 @@ export const addCategory = async ({ category }) => {
 
     if (response.status !== 201) {
         console.log(response);
-        throw new Error("Something went wrong");
+        throw new Error(response.response.data.message);
     }
     return response.data.category;
 }
