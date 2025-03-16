@@ -5,6 +5,7 @@ import QuickActions from "../features/dashboard/QuickActions";
 import ModalWindow from "../components/modalWindow";
 import { useState } from "react";
 import NoteForm from "../features/notes/NoteForm";
+import CategoryForm from "../features/categories/CategoryForm";
 
 export default function DashboardPage() {
   const [modelOpen, setModelOpen] = useState("");
@@ -20,7 +21,7 @@ export default function DashboardPage() {
       )}
       {modelOpen == "categories" && (
         <ModalWindow onClose={() => setModelOpen(false)}>
-          <div>Categories Creation</div>
+          <CategoryForm close={() => setModelOpen(false)} />
         </ModalWindow>
       )}
       <QuickActions setModelOpen={setModelOpen} />

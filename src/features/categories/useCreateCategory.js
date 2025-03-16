@@ -8,6 +8,7 @@ export default function useCreateCategory() {
         mutationFn: addCategory,
         onSuccess: () => {
             queryClient.invalidateQueries("categories");
+            queryClient.invalidateQueries(["categories", "recent"]);
             toast.success("Category added successfully");
         }, onError: (error) => {
             console.error(error);

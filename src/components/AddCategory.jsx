@@ -5,6 +5,7 @@ export default function AddCategory({
   allowSubmit,
   setAllowSubmit,
   watch,
+  setValue,
 }) {
   const newCategory = watch("newCategory");
   const { isCreatingCategory, createCategory } = useCreateCategory();
@@ -13,7 +14,8 @@ export default function AddCategory({
     createCategory({
       category: newCategory,
       onsSuccess: () => {
-        setAllowSubmit(true);
+        console.log("Hello");
+        setValue("newCategory", "");
       },
     });
   };
@@ -41,11 +43,7 @@ export default function AddCategory({
           <div className="flex justify-between items-center w-full gap-4">
             <input
               {...register}
-              className={`border-2  p-2 rounded-md w-full ${
-                error
-                  ? "focus:border-red-500 border-red-500"
-                  : "focus:border-background border-grey-200"
-              } focus:outline-none`}
+              className={`border-2  p-2 rounded-md w-full focus:border-background border-grey-200 focus:outline-none`}
             />
             <button
               className="px-4 py-1 text-sm font-semibold  border-2  border-primary text-primary bg-transparent hover:bg-primary  hover:text-white rounded-full cursor-pointer disabled:bg-gray-400 disabled:cursor-not-allowed disabled:border-0 disabled:text-white"
@@ -57,7 +55,6 @@ export default function AddCategory({
             </button>
           </div>
         </div>
-        <p className="text-red-500">{error}</p>
       </div>
     </div>
   );

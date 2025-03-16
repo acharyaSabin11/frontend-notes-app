@@ -52,6 +52,7 @@ export default function CategoriesSelector({
           allowSubmit={allowSubmit}
           setAllowSubmit={setAllowSubmit}
           watch={watch}
+          setValue={setValue}
         />
       </div>
       <input type="hidden" {...register("categories")} />
