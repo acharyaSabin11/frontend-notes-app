@@ -36,3 +36,35 @@ export const getCategories = async () => {
     console.log(response);
     return response.data.categories ?? [];
 }
+
+export const getCategoryDetail = async (categoryId) => {
+    const response = await client.get(`/categories/${categoryId}`);
+
+    if (response.status !== 200) {
+        console.log(response);
+        throw new Error("Something went wrong");
+    }
+    return response.data.data;
+}
+
+export const deleteCategory = async (categoryId) => {
+    const response = await client.delete(`/categories/${categoryId}`);
+
+    if (response.status !== 204) {
+        console.log(response);
+        throw new Error("Something went wrong");
+    }
+    return response.data;
+}
+
+export const updateCategory = async ({ categoryId, title }) => {
+    const response = await client.put(`/categories/${categoryId}`, {
+        title,
+    });
+
+    if (response.status !== 200) {
+        console.log(response);
+        throw new Error("Something went wrong");
+    }
+    return response.data;
+}

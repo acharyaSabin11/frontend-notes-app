@@ -22,6 +22,7 @@ export default function FilterCategories() {
             </div>
           </h2>
           <ul className="flex flex-wrap gap-2">
+            <Category key="all" category={{ id: "all", title: "All" }} />
             {categories.map((category) => (
               <Category key={category.id} category={category} />
             ))}

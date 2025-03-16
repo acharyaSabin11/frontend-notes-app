@@ -10,6 +10,8 @@ import DashboardPage from "./pages/DashboardPage";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import NoteDetailPage from "./pages/NoteDetailPage";
 import AllNotesPage from "./pages/AllNotes";
+import AllCategoriesPage from "./pages/AllCategories";
+import CategoryDetailPage from "./pages/CategoryDetailPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,6 +38,8 @@ function App() {
                 <Route path="dashboard" element={<DashboardPage />} />
                 <Route path="notes/:id" element={<NoteDetailPage />} />
                 <Route path="notes" element={<AllNotesPage />} />
+                <Route path="categories" element={<AllCategoriesPage />} />
+                <Route path="categories/:id" element={<CategoryDetailPage />} />
               </Route>
               <Route index element={<h1>Home</h1>} />
               <Route path="login" element={<LoginPage />} />

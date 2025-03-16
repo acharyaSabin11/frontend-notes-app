@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Spinner from "../../components/spinner";
 import useRecentCategories from "./useRecentCategories";
 
@@ -6,7 +7,15 @@ export default function RecentCategories() {
     useRecentCategories();
   return (
     <div className="h-full w-full  flex flex-col items-start  gap-6">
-      <h1 className="text-2xl font-semibold">Recent Categories</h1>
+      <div className="flex justify-between w-full">
+        <h1 className="text-2xl font-semibold">Recent Categories</h1>
+        <Link
+          to="/categories"
+          className="text-primary font-bold cursor-pointer hover:rounded-full hover:bg-primary hover:text-white px-4 py-1  transition-all duration-300"
+        >
+          View all
+        </Link>
+      </div>
       {isFetchingRecentCategories ? (
         <Spinner />
       ) : isError ? (
