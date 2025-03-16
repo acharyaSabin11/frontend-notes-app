@@ -11,8 +11,16 @@ export default function CategoriesSelector({
   setAllowSubmit,
   watch,
   isGettingCategories,
+  defaultSelectedCategories,
 }) {
   const [selectedCategories, setSelectedCategories] = useState([]);
+
+  useEffect(() => {
+    console.log(defaultSelectedCategories);
+    if (defaultSelectedCategories) {
+      setSelectedCategories(defaultSelectedCategories);
+    }
+  }, [defaultSelectedCategories]);
 
   useEffect(() => {
     setValue(

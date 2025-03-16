@@ -4,11 +4,15 @@ import Spinner from "../components/spinner";
 import AppButton from "../components/AppButton";
 import { Pen, Trash } from "lucide-react";
 import useDeleteNote from "../features/notes/useDeleteNote";
+import ModalWindow from "../components/modalWindow";
+import { useState } from "react";
+import NoteForm from "../features/notes/NoteForm";
 
 export default function NoteDetailPage() {
   const { id: noteId } = useParams();
   const { noteData, isGettingNote, isError } = useNoteDetail({ noteId });
   const { deleteNote, isDeleting } = useDeleteNote();
+  const [modelOpen, setModelOpen] = useState(false);
   const navigate = useNavigate();
 
   if (isGettingNote || isDeleting) {
@@ -33,8 +37,31 @@ export default function NoteDetailPage() {
   return (
     <div className="max-w-[70rem] h-full flex flex-col gap-10 p-4 mx-auto">
       <h1 className="text-4xl font-semibold capitalize self-center">{title}</h1>
+      {modelOpen && (
+        <ModalWindow onClose={() => setModelOpen(false)}>
+          <NoteForm
+            type="update"
+            close={() => setModelOpen(false)}
+            defVals={{
+              title: title,
+              description: description,
+              additional_info: additional_info,
+              selectedCategories: categories,
+            }}
+            noteId={noteId}
+          />
+        </ModalWindow>
+      )}
       <div className="flex justify-end gap-4">
-        <AppButton disabled={isDeleting}>
+        <AppButton
+          disabled={isDeleting}
+          onClick={() => {
+            {
+              console.log("Edit button clicked");
+              setModelOpen(true);
+            }
+          }}
+        >
           <div className="flex gap-2 items-center">
             <Pen size={16} strokeWidth={3} />
             <span>Edit</span>

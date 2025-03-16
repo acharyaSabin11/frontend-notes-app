@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import DashboardPage from "./pages/DashboardPage";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import NoteDetailPage from "./pages/NoteDetailPage";
+import AllNotesPage from "./pages/AllNotes";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,6 +35,7 @@ function App() {
               >
                 <Route path="dashboard" element={<DashboardPage />} />
                 <Route path="notes/:id" element={<NoteDetailPage />} />
+                <Route path="notes" element={<AllNotesPage />} />
               </Route>
               <Route index element={<h1>Home</h1>} />
               <Route path="login" element={<LoginPage />} />

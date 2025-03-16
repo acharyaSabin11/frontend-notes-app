@@ -6,7 +6,15 @@ export default function RecentNotes() {
   const { notes, isFetchingRecentNotes, isError } = useRecentNotes();
   return (
     <div className="h-full w-full  flex flex-col items-start  gap-6">
-      <h1 className="text-2xl font-semibold">Recent Notes</h1>
+      <div className="flex justify-between w-full">
+        <h1 className="text-2xl font-semibold">Recent Notes</h1>
+        <Link
+          to="/notes"
+          className="text-primary font-bold cursor-pointer hover:rounded-full hover:bg-primary hover:text-white px-4 py-1  transition-all duration-300"
+        >
+          View all
+        </Link>
+      </div>
       {isFetchingRecentNotes ? (
         <Spinner />
       ) : isError ? (

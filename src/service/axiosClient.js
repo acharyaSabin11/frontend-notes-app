@@ -38,15 +38,22 @@ function createAxiosResponseInterceptor() {
             }
             client.interceptors.response.eject(interceptor);
             return client.post("/refresh").then((response) => {
+                console.log(1);
                 if (response.status !== 200) {
-                    throw new Error("Failed to refresh token");
+                    return Promise
+                        .reject(error);
                 }
+                console.log(response.status);
+                console.log(2);
                 store.dispatch(handleLogin(response.data));
+                console.log(3);
                 error.response.config.headers["Authorization"] = `Bearer ${response.data.accessToken}`;
+                console.log(4);
                 return client(error.response.config);
             }).catch((err) => {
+                console.log("Expired");
                 return Promise.reject(err);
-            }).finally(createAxiosResponseInterceptor());
+            }).finally(setTimeout(createAxiosResponseInterceptor(), 0));
 
         }
     );

@@ -49,3 +49,35 @@ export const deleteNote = async (noteId) => {
     }
     return response.data;
 }
+
+export const updateNote = async ({ noteId, title, description, additional_info, addCategories, removeCategories }) => {
+    const response = await client.put(`/notes/${noteId}`, {
+        title,
+        description,
+        additional_info,
+        addCategories,
+        removeCategories,
+    });
+
+    if (response.status !== 200) {
+        console.log(response);
+        throw new Error("Something went wrong");
+    }
+    return response.data.note;
+}
+
+export const getAllNotes = async (page, filter) => {
+    const response = await client.get("/notes", {
+        params: {
+            limit: 1,
+            page: page,
+            filter: filter,
+        },
+    });
+
+    if (response.status !== 200) {
+        console.log(response);
+        throw new Error("Something went wrong");
+    }
+    return response.data.data ?? [];
+}
