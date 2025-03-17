@@ -10,8 +10,8 @@ export default function useLogin() {
     const navigate = useNavigate();
     const { isPending, mutate } = useMutation({
         mutationFn: login,
-        onError: (error) => {
-            toast.error(error.response.data.message);
+        onError: () => {
+            toast.error("Invalid Credentials");
         },
         onSuccess: (data) => {
             dispatch(handleLogin(data));

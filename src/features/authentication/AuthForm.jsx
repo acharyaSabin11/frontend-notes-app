@@ -38,7 +38,7 @@ export default function AuthForm({
           })}
         />
         <AppInput
-          type="text"
+          type="password"
           title="password"
           error={errors.password?.message}
           register={register("password", {
