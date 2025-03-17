@@ -3,6 +3,7 @@ import { useState } from "react";
 import useSearchResults from "../hooks/useSearchResults";
 import Spinner from "./spinner";
 import useDebounce from "../hooks/useDebounce";
+import { Link } from "react-router-dom";
 
 export default function NotesSearchBar() {
   const [isSearching, setIsSearching] = useState(false);
@@ -27,7 +28,7 @@ export default function NotesSearchBar() {
 
   return (
     <div className="flex flex-col items-center justify-start w-full gap-2">
-      <div className="relative h-10 w-60 ">
+      <div className="relative h-10 w-full sm:w-100 ">
         <Search className="absolute translate-y-1/2 bottom-1/2 pl-4 size-8 text-gray-700" />
         <input
           type="text"
@@ -65,9 +66,10 @@ export default function NotesSearchBar() {
             <h2 className="text-2xl font-semibold">Search Results</h2>
             <div className="flex flex-col gap-4">
               {searchResults.map((note) => (
-                <div
+                <Link
+                  to={`/notes/${note.id}`}
                   key={note.id}
-                  className="border-2 border-black px-4 py-2 min-h-20 rounded-lg"
+                  className="border-2 border-black px-4 py-2 min-h-20 rounded-lg hover:border-primary"
                 >
                   <h3 className="text-lg font-semibold">
                     {highlightText(note.title, text)}
@@ -75,7 +77,7 @@ export default function NotesSearchBar() {
                   <p className="text-sm">
                     {highlightText(note.description, text)}
                   </p>
-                </div>
+                </Link>
               ))}
             </div>
           </>

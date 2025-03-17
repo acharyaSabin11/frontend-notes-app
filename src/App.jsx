@@ -1,4 +1,10 @@
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Outlet,
+  Route,
+  Routes,
+} from "react-router-dom";
 import "./styles/globalStyles.css";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
@@ -41,7 +47,8 @@ function App() {
                 <Route path="categories" element={<AllCategoriesPage />} />
                 <Route path="categories/:id" element={<CategoryDetailPage />} />
               </Route>
-              <Route index element={<h1>Home</h1>} />
+              <Route index element={<Navigate to="/dashboard" />} />
+              <Route path="*" element={<Navigate to="/dashboard" />} />
               <Route path="login" element={<LoginPage />} />
               <Route path="signup" element={<SignupPage />} />
             </Routes>

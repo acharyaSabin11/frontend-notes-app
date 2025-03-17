@@ -6,7 +6,7 @@ export default function LogoutButton() {
   return (
     <button
       onClick={logout}
-      className="bg-transparent border-2 border-primary rounded-full text-primary hover:bg-primary hover:text-white disabled:text-white p-2 disabled:bg-gray-500 cursor-pointer"
+      className="bg-transparent border-2 size-10 border-primary rounded-full text-primary hover:bg-primary hover:text-white disabled:text-white p-2 disabled:bg-gray-500 cursor-pointer"
       disabled={isLoggingOut}
     >
       <LogOut size={16} />

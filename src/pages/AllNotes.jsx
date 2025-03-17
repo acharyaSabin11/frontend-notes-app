@@ -4,6 +4,7 @@ import FilterCategories from "../components/FilterCategories";
 import Spinner from "../components/spinner";
 import useAllNotes from "../features/notes/useAllNotes";
 import SortBy from "../components/SortBy";
+import Logo from "../components/Logo";
 
 export default function AllNotesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -32,8 +33,9 @@ export default function AllNotesPage() {
   const { notes, page, totalPages, totalCount } = data;
 
   return (
-    <div className="max-w-[70rem] min-h-screen flex flex-col gap-10 p-4 mx-auto justify-between">
-      <div className="flex flex-col gap-4">
+    <div className="max-w-[70rem] min-h-screen flex flex-col gap-10 p-8 lg:p-10 mx-auto justify-between">
+      <div className="flex flex-col gap-6">
+        <Logo />
         <h1 className="text-4xl text-semibold self-center">All Notes</h1>
         <SortBy />
         <FilterCategories />
@@ -43,7 +45,8 @@ export default function AllNotesPage() {
         {page > 1 && (
           <AppButton
             onClick={() => {
-              setSearchParams({ ...searchParams, page: page - 1 });
+              searchParams.set("page", page - 1);
+              setSearchParams(searchParams, { replace: true });
             }}
           >
             Prev
@@ -55,7 +58,8 @@ export default function AllNotesPage() {
         {page < totalPages && (
           <AppButton
             onClick={() => {
-              setSearchParams({ ...searchParams, page: page + 1 });
+              searchParams.set("page", page + 1);
+              setSearchParams(searchParams, { replace: true });
             }}
           >
             Next

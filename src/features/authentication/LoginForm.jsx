@@ -16,11 +16,11 @@ export default function LoginForm() {
     });
   }
   return (
-    <div className="max-w-400 min-w-100 flex flex-col gap-10 items-center">
+    <div className="max-w-120 md:max-w-120  min-w-72 md:min-w-100 flex flex-col gap-10 items-center w-full">
       <h2 className="text-2xl font-semibold">Login to Notes App</h2>
       <form
         onSubmit={handleSubmit(submitHandler)}
-        className="max-w-400 min-w-100 flex flex-col gap-6"
+        className="max-w-400 w-full flex flex-col gap-6"
       >
         <AppInput
           type="text"
@@ -34,7 +34,7 @@ export default function LoginForm() {
           })}
         />
         <AppInput
-          type="text"
+          type="password"
           title="password"
           error={errors.password?.message}
           register={register("password", {

@@ -35,8 +35,8 @@ export default function NoteDetailPage() {
   const { title, description, additional_info } = note;
 
   return (
-    <div className="max-w-[70rem] h-full flex flex-col gap-10 p-4 mx-auto">
-      <h1 className="text-4xl font-semibold capitalize self-center">{title}</h1>
+    <div className="max-w-[70rem] h-full flex flex-col gap-10 p-8 lg:p-10 mx-auto">
+      <h1 className="text-4xl font-semibold capitalize self-center text-center">{`${title}`}</h1>
       {modelOpen && (
         <ModalWindow onClose={() => setModelOpen(false)}>
           <NoteForm
@@ -52,7 +52,7 @@ export default function NoteDetailPage() {
           />
         </ModalWindow>
       )}
-      <div className="flex justify-end gap-4">
+      <div className="flex justify-center lg:justify-end gap-4">
         <AppButton
           disabled={isDeleting}
           onClick={() => {
@@ -86,11 +86,11 @@ export default function NoteDetailPage() {
       </div>
       <div className="flex flex-col gap-1">
         <h3 className="text-2xl font-semibold">Description</h3>
-        <p className="text-xl font-semibold">{description}</p>
+        <p className="text-xl ">{description}</p>
       </div>
       <div className="flex flex-col gap-1">
         <h3 className="text-2xl font-semibold">Additional Info</h3>
-        <p className="text-xl font-semibold">{additional_info}</p>
+        <p className="text-xl ">{additional_info}</p>
       </div>
       <div className="flex flex-col gap-1 items-start">
         <h3 className="text-2xl font-semibold">Associated Categories</h3>

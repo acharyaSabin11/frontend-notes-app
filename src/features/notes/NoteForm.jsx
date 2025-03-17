@@ -92,7 +92,7 @@ export default function NoteForm({ close, type = "create", defVals, noteId }) {
 
   return (
     <form
-      className="min-w-80 max-w-120 flex flex-col gap-2"
+      className=" min-w-40 overflow-y-scroll lg:min-w-80 max-w-120 flex flex-col gap-2"
       onSubmit={handleSubmit(sumbitHandler)}
     >
       <h2 className="text-xl font-semibold">

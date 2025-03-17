@@ -20,11 +20,11 @@ export default function AuthForm({
   }, [isSettled, reset]);
 
   return (
-    <div className="max-w-400 min-w-100 flex flex-col gap-10 items-center">
+    <div className="max-w-120 lg:max-w-140 min-w-72 flex flex-col gap-10 items-center w-full">
       <h2 className="text-2xl font-semibold">{titleText}</h2>
       <form
         onSubmit={handleSubmit(submitHandler)}
-        className="max-w-400 min-w-100 flex flex-col gap-6"
+        className="max-w-400 w-full flex flex-col gap-6"
       >
         <AppInput
           type="text"

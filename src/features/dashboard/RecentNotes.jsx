@@ -8,7 +8,7 @@ export default function RecentNotes() {
   return (
     <div className="h-full w-full  flex flex-col items-start  gap-6">
       <div className="flex justify-between w-full">
-        <h1 className="text-2xl font-semibold">Recent Notes</h1>
+        <h1 className="text-2xl lg:text-2xl font-semibold">Recent Notes</h1>
         {notes && notes.length > 0 && (
           <Link
             to="/notes"
@@ -38,7 +38,7 @@ function RecentNoteBox({ note }) {
   return (
     <Link
       to={`/notes/${note.id}`}
-      className="bg-white p-4 rounded-lg shadow-md w-full hover:shadow-lg cursor-pointer hover:shadow-primary transition-all duration-300 "
+      className="bg-white p-4 rounded-lg shadow-md w-full hover:shadow-lg cursor-pointer hover:shadow-primary transition-all duration-300 flex flex-col gap-2"
     >
       <h2 className="text-xl font-semibold">{note.title}</h2>
       <p className="text-sm text-gray-500">{note.description}</p>

@@ -7,6 +7,7 @@ import Spinner from "../components/spinner";
 import AppButton from "../components/AppButton";
 import { Pen, Trash } from "lucide-react";
 import ModalWindow from "../components/modalWindow";
+import Logo from "../components/Logo";
 
 export default function CategoryDetailPage() {
   const { id: categoryId } = useParams();
@@ -39,8 +40,9 @@ export default function CategoryDetailPage() {
   const { title } = category;
 
   return (
-    <div className="max-w-[70rem] h-full flex flex-col gap-10 p-4 mx-auto">
-      <h1 className="text-4xl font-semibold capitalize self-center">{title}</h1>
+    <div className="max-w-[70rem] h-full flex flex-col gap-6 p-4 mx-auto">
+      <Logo />
+      <h1 className="text-3xl font-semibold capitalize self-center text-center">{` ${title}`}</h1>
       {modelOpen && (
         <ModalWindow onClose={() => setModelOpen(false)}>
           <CategoryForm
@@ -53,7 +55,7 @@ export default function CategoryDetailPage() {
           />
         </ModalWindow>
       )}
-      <div className="flex justify-end gap-4">
+      <div className="flex sm:justify-end justify-center gap-4">
         <AppButton
           disabled={isDeleting}
           onClick={() => {
@@ -92,7 +94,7 @@ export default function CategoryDetailPage() {
         <div className="text-xl font-semibold flex flex-col gap-2">
           {notes.length == 0 && (
             <div className="font-normal text-base">
-              No associated categories found
+              No associated notes found
             </div>
           )}
           {!notes.isEmpty &&

@@ -29,7 +29,7 @@ export default function RecentCategories() {
             <Link
               to={`/categories/${note.id}`}
               key={note.id}
-              className="bg-white p-4 rounded-lg shadow-md w-full hover:shadow-primary hover:shadow-lg"
+              className="bg-white py-2 px-4 lg:py-4 rounded-lg shadow-md w-full hover:shadow-primary hover:shadow-lg"
             >
               <h2 className="text-xl font-semibold">{note.title}</h2>
               <p className="text-sm text-gray-500">{note.description}</p>

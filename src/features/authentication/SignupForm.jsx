@@ -15,7 +15,7 @@ export default function SignupForm() {
   };
 
   return (
-    <div>
+    <div className="w-full flex justify-center">
       <AuthForm
         submitHandler={submitHandler}
         isProcessing={isSigningUp}

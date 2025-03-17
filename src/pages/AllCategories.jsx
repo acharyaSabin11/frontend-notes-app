@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Spinner from "../components/spinner";
 import useCategoriesData from "../features/categories/useCategoriesData";
+import Logo from "../components/Logo";
 
 export default function AllCategoriesPage() {
   const { isGettingCategories, isError, categories } = useCategoriesData();
@@ -16,8 +17,9 @@ export default function AllCategoriesPage() {
   }
 
   return (
-    <div className="max-w-[70rem] min-h-screen flex flex-col gap-10 p-4 mx-auto justify-start  ">
-      <h1 className="text-4xl text-semibold self-center">All Categories</h1>
+    <div className="max-w-[70rem] min-h-screen flex flex-col gap-6 p-8 lg:p-10 mx-auto justify-start  ">
+      <Logo />
+      <h1 className="text-3xl text-semibold self-center">All Categories</h1>
       <Categories categories={categories} isError={isError} />
     </div>
   );
