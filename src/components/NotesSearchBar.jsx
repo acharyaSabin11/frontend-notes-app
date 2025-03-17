@@ -32,8 +32,10 @@ export default function NotesSearchBar() {
         <h2 className="text-2xl font-semibold">Search Results</h2>
         {isLoading && <Spinner />}
         {isError && <div>Something went wrong</div>}
-        {!searchResults ||
-          (searchResults.length === 0 && <div>No results found</div>)}
+        {text.length < 3 && <div>Enter atleast 3 characters to search</div>}
+        {text.length >= 3 &&
+          (!searchResults ||
+            (searchResults.length === 0 && <div>No results found</div>))}
         {searchResults && searchResults.length > 0 && (
           <div className="flex flex-col gap-4">
             {searchResults.map((note) => (
@@ -42,32 +44,36 @@ export default function NotesSearchBar() {
                 className="border-2 border-black px-4 py-2 min-h-20 rounded-lg"
               >
                 <h3 className="text-lg font-semibold">
-                  {note.title.split(text).map((str, index, array) => {
-                    if (index === array.length - 1) {
-                      return <span>{str}</span>;
-                    } else {
-                      return (
-                        <span>
-                          {str}
-                          <span className="text-primary">{text}</span>
-                        </span>
-                      );
-                    }
-                  })}
+                  {note.title
+                    .split(new RegExp(text, "gi"))
+                    .map((str, index, array) => {
+                      if (index === array.length - 1) {
+                        return <span>{str}</span>;
+                      } else {
+                        return (
+                          <span>
+                            {str}
+                            <span className="text-primary">{text}</span>
+                          </span>
+                        );
+                      }
+                    })}
                 </h3>
                 <p className="text-sm">
-                  {note.description.split(text).map((str, index, array) => {
-                    if (index === array.length - 1) {
-                      return <span>{str}</span>;
-                    } else {
-                      return (
-                        <span>
-                          {str}
-                          <span className="text-primary">{text}</span>
-                        </span>
-                      );
-                    }
-                  })}
+                  {note.description
+                    .split(new RegExp(text, "gi"))
+                    .map((str, index, array) => {
+                      if (index === array.length - 1) {
+                        return <span>{str}</span>;
+                      } else {
+                        return (
+                          <span>
+                            {str}
+                            <span className="text-primary">{text}</span>
+                          </span>
+                        );
+                      }
+                    })}
                 </p>
               </div>
             ))}

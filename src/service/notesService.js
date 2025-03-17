@@ -69,7 +69,7 @@ export const updateNote = async ({ noteId, title, description, additional_info, 
 export const getAllNotes = async (page, filter) => {
     const response = await client.get("/notes", {
         params: {
-            limit: 1,
+            limit: 3,
             page: page,
             filter: filter,
         },
@@ -83,31 +83,22 @@ export const getAllNotes = async (page, filter) => {
 }
 
 export const searchNotes = async (searchText, signal) => {
-    if (!searchText) {
-        console.log(1);
+    if (!searchText || searchText.length < 3) {
         return [];
     }
-
-    console.log(2);
-
     try {
-        console.log(7);
         const response = await client.get("/notes/search", {
             signal: signal,
             params: {
                 filter: searchText,
             },
         });
-        console.log(8);
         return response.data.data;
 
     } catch (error) {
-        console.log(9);
         if (client.isCancel(error)) {
-            console.log(10);
             console.log("Request cancelled", error.message);
         }
-        console.log(11);
         throw error;
     }
 }

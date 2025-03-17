@@ -3,10 +3,13 @@ import AppButton from "../components/AppButton";
 import FilterCategories from "../components/FilterCategories";
 import Spinner from "../components/spinner";
 import useAllNotes from "../features/notes/useAllNotes";
+import SortBy from "../components/SortBy";
 
 export default function AllNotesPage() {
   const [searchParams, setSearchParams] = useSearchParams();
+
   const { isLoadingNotes, isError, notes: data } = useAllNotes();
+
   if (isLoadingNotes) {
     return (
       <div className="flex flex-col justify-center items-center">
@@ -32,6 +35,7 @@ export default function AllNotesPage() {
     <div className="max-w-[70rem] min-h-screen flex flex-col gap-10 p-4 mx-auto justify-between">
       <div className="flex flex-col gap-4">
         <h1 className="text-4xl text-semibold self-center">All Notes</h1>
+        <SortBy />
         <FilterCategories />
         <Notes notes={notes} />
       </div>
