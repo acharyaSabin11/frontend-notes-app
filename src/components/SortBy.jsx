@@ -5,14 +5,14 @@ export default function SortBy() {
   const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     console.log("SortBy");
-    if (!searchParams.get("sort") && !searchParams.get("orderBy")) {
+    if (!searchParams.get("sortBy") && !searchParams.get("orderBy")) {
       console.log("No Both");
-      searchParams.set("sort", "Date");
+      searchParams.set("sortBy", "Date");
       searchParams.set("orderBy", "DESC");
       setSearchParams(searchParams);
-    } else if (!searchParams.get("sort")) {
+    } else if (!searchParams.get("sortBy")) {
       console.log("No Sort");
-      searchParams.set("sort", "Date");
+      searchParams.set("sortBy", "Date");
       setSearchParams(searchParams);
     } else if (!searchParams.get("orderBy")) {
       searchParams.set("orderBy", "DESC");
@@ -22,12 +22,12 @@ export default function SortBy() {
 
   function setSortBy(value) {
     const [sortBy, orderBy] = value.split(" ");
-    searchParams.set("sort", sortBy);
+    searchParams.set("sortBy", sortBy);
     searchParams.set("orderBy", orderBy);
     setSearchParams(searchParams);
   }
 
-  const sortBy = searchParams.get("sort") || "Date";
+  const sortBy = searchParams.get("sortBy") || "Date";
   const orderBy = searchParams.get("orderBy") || "DESC";
   return (
     <div className="flex items-center space-x-2">

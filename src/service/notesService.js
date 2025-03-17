@@ -66,12 +66,14 @@ export const updateNote = async ({ noteId, title, description, additional_info, 
     return response.data.note;
 }
 
-export const getAllNotes = async (page, filter) => {
+export const getAllNotes = async (page, filter, sortBy, orderBy) => {
     const response = await client.get("/notes", {
         params: {
             limit: 3,
             page: page,
             filter: filter,
+            sortBy: sortBy,
+            orderBy: orderBy,
         },
     });
 
