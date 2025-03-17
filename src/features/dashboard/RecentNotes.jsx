@@ -4,6 +4,7 @@ import useRecentNotes from "./useRecentNotes";
 
 export default function RecentNotes() {
   const { notes, isFetchingRecentNotes, isError } = useRecentNotes();
+
   return (
     <div className="h-full w-full  flex flex-col items-start  gap-6">
       <div className="flex justify-between w-full">

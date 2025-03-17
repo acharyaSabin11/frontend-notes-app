@@ -5,6 +5,7 @@ const initialState = {
     userid: null,
     username: null,
     accessToken: null,
+    expired: null,
 };
 
 const authSlice = createSlice({
@@ -16,15 +17,20 @@ const authSlice = createSlice({
             state.userid = action.payload.user.id;
             state.username = action.payload.user.username;
             state.accessToken = action.payload.accessToken
+            state.expired = false;
         },
         handleLogout(state) {
             Object.assign(state, initialState);
+            state.expired = true;
         },
         updateAccessToken(state, action) {
             state.accessToken = action.payload;
         },
+        resetExpiry(state) {
+            state.expired = null;
+        },
     },
 });
 
-export const { handleLogin, handleLogout, updateAccessToken } = authSlice.actions;
+export const { handleLogin, handleLogout, updateAccessToken, resetExpiry } = authSlice.actions;
 export default authSlice.reducer;

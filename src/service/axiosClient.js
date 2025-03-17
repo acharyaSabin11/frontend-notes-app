@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import store from "../store/store";
-import { handleLogin } from "../store/authSlice";
+import { handleLogin, handleLogout } from "../store/authSlice";
 
 
 const client = axios.create({
@@ -27,6 +27,8 @@ client.interceptors.request.use(
     }
 );
 
+// let refreshTokenPromise = null;
+
 function createAxiosResponseInterceptor() {
     const interceptor = client.interceptors.response.use(
         (response) => {
@@ -34,30 +36,67 @@ function createAxiosResponseInterceptor() {
         },
         async (error) => {
             if (error.response.status !== 401) {
+
                 return Promise.reject(error);
             }
+
             client.interceptors.response.eject(interceptor);
-            return client.post("/refresh").then((response) => {
-                console.log(1);
-                if (response.status !== 200) {
-                    return Promise
-                        .reject(error);
-                }
+            try {
+                const response = await client.post("/refresh");
                 console.log(response.status);
-                console.log(2);
-                store.dispatch(handleLogin(response.data));
-                console.log(3);
-                error.response.config.headers["Authorization"] = `Bearer ${response.data.accessToken}`;
-                console.log(4);
-                return client(error.response.config);
-            }).catch((err) => {
-                console.log("Expired");
-                return Promise.reject(err);
-            }).finally(setTimeout(createAxiosResponseInterceptor(), 0));
+                if (response.status === 200) {
+                    store.dispatch(handleLogin(response.data));
+                    error.response.config.headers["Authorization"] = `Bearer ${response.data.accessToken}`;
+                    return axios(error.response.config);
+                }
+                else {
+                    return Promise.reject(error);
+                }
+            } catch (refreshError) {
+                if (refreshError.status === 400) {
+                    store.dispatch(handleLogout());
+                }
+                return Promise.reject(refreshError);
+            } finally {
+                createAxiosResponseInterceptor();
+            }
+
 
         }
     );
 }
+
+
+// function createAxiosResponseInterceptor() {
+//     const interceptor = client.interceptors.response.use(
+//         (response) => {
+//             return response;
+//         },
+//         async (error) => {
+//             if (error.response.status !== 401) {
+//                 return Promise.reject(error);
+//             }
+//             if (!refreshTokenPromise) {
+//                 refreshTokenPromise = client.post("/refresh").then((response) => {
+//                     store.dispatch(handleLogin(response.data));
+//                     return response;
+//                 }).catch((error) => {
+//                     return Promise.reject(error);
+//                 }).finally(() => {
+//                     refreshTokenPromise = null;
+//                 });
+//             }
+//             try {
+//                 const response = await refreshTokenPromise;
+//                 error.response.config.headers["Authorization"] = `Bearer ${response.data.accessToken}`;
+//                 return client(error.response.config);
+//             }
+//             catch (refreshError) {
+//                 return Promise.reject(refreshError);
+//             }
+//         }
+//     );
+// }
 
 createAxiosResponseInterceptor();
 
