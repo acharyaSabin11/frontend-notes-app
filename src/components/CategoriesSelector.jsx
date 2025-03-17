@@ -12,6 +12,7 @@ export default function CategoriesSelector({
   watch,
   isGettingCategories,
   defaultSelectedCategories,
+  reset,
 }) {
   const [selectedCategories, setSelectedCategories] = useState([]);
 
@@ -53,9 +54,22 @@ export default function CategoriesSelector({
             setAllowSubmit={setAllowSubmit}
             watch={watch}
             setValue={setValue}
+            reset={reset}
+            setSelectedCategories={setSelectedCategories}
           />
         </div>
-      ) : null}
+      ) : (
+        <AddCategory
+          register={register("newCategory")}
+          formState={formState}
+          allowSubmit={allowSubmit}
+          setAllowSubmit={setAllowSubmit}
+          watch={watch}
+          setValue={setValue}
+          reset={reset}
+          setSelectedCategories={setSelectedCategories}
+        />
+      )}
       <input type="hidden" {...register("categories")} />
     </div>
   );
@@ -67,8 +81,8 @@ function Category({ category, selectedCategories, setSelectedCategories }) {
       className={`px-4 py-1 text-sm font-semibold  border-2 ${
         selectedCategories.map((c) => c.id).includes(category.id)
           ? "bg-primary border-primary text-white"
-          : "bg-transparent border-black text-black"
-      } bg-primary rounded-full cursor-pointer`}
+          : "bg-transparent border-black text-black focus:border-primary  focus:text-primary"
+      } bg-primary rounded-full cursor-pointer focus:outline-none `}
       type="button"
       onClick={() => {
         if (selectedCategories.map((c) => c.id).includes(category.id)) {

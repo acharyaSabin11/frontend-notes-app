@@ -15,32 +15,28 @@ export default function AllCategoriesPage() {
     );
   }
 
-  if (isError) {
-    return (
-      <div className="flex flex-col justify-center items-center">
-        Something went wrong while loading your categories
-      </div>
-    );
-  }
-
   return (
     <div className="max-w-[70rem] min-h-screen flex flex-col gap-10 p-4 mx-auto justify-start  ">
       <h1 className="text-4xl text-semibold self-center">All Categories</h1>
-      <Categories categories={categories} />
+      <Categories categories={categories} isError={isError} />
     </div>
   );
 }
 
-function Categories({ categories }) {
+function Categories({ categories, isError }) {
   return (
     <div className="flex flex-col gap-6">
       <h2 className="text-2xl font-semibold">Categories</h2>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {categories.length === 0 && <div>No categories found</div>}
-        {categories.map((category) => (
-          <Category key={category.id} category={category} />
-        ))}
-      </div>
+      {isError ? (
+        <div>Something went wrong</div>
+      ) : (
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {categories.length === 0 && <div>No categories found</div>}
+          {categories.map((category) => (
+            <Category key={category.id} category={category} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

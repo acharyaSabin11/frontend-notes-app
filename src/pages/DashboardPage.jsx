@@ -17,11 +17,13 @@ export default function DashboardPage() {
     <div className="min-h-full w-full  flex flex-col items-center p-10 gap-6 py-10 no-scrollbar">
       <div className="flex justify-between w-full items-center">
         <Logo />
-        <h1 className="text-4xl font-semibold mr-40">Welcome to Notes App</h1>
-        <LogoutButton />
+        <h1 className="text-4xl font-semibold ">Welcome to Notes App</h1>
+        <div className="flex items-center gap-4">
+          <h2 className="text-2xl font-semibold self-start">Hi, {username}</h2>
+          <LogoutButton />
+        </div>
       </div>
       <NotesSearchBar />
-      <h2 className="text-2xl font-semibold self-start">Hi, {username}</h2>
       {modelOpen == "notes" && (
         <ModalWindow onClose={() => setModelOpen(false)}>
           <NoteForm close={() => setModelOpen(false)} />
@@ -33,8 +35,12 @@ export default function DashboardPage() {
         </ModalWindow>
       )}
       <QuickActions setModelOpen={setModelOpen} />
-      <RecentNotes />
-      <RecentCategories />
+      <div className="flex-1 w-full">
+        <RecentNotes />
+      </div>
+      <div className="flex-1 w-full">
+        <RecentCategories />
+      </div>
     </div>
   );
 }

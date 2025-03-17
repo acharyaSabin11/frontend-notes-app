@@ -2,19 +2,9 @@ import { Filter } from "lucide-react";
 import useCategoriesData from "../features/categories/useCategoriesData";
 import Spinner from "./spinner";
 import { useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
 
 export default function FilterCategories() {
-  const { isGettingCategories, isError, categories } = useCategoriesData();
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  useEffect(() => {
-    console.log("FilterCategories");
-    if (!searchParams.get("filter")) {
-      searchParams.set("filter", "all");
-      setSearchParams(searchParams);
-    }
-  }, [searchParams, setSearchParams]);
+  const { isGettingCategories, categories } = useCategoriesData();
 
   return (
     <div>
@@ -43,7 +33,7 @@ function Category({ category }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const handleFilter = () => {
     searchParams.set("filter", category.id);
-    setSearchParams(searchParams);
+    setSearchParams(searchParams, { replace: true });
   };
   return (
     <li>

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import AppInput from "../../components/AppInput";
 import CategoriesSelector from "../../components/CategoriesSelector";
 import AppButton from "../../components/AppButton";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useCategoriesData from "../categories/useCategoriesData";
 import toast from "react-hot-toast";
 import useCreateNote from "./useCreateNote";
@@ -15,6 +15,11 @@ export default function NoteForm({ close, type = "create", defVals, noteId }) {
   const [allowSubmit, setAllowSubmit] = useState(true);
   const { isCreatingNote, createNote } = useCreateNote();
   const { isUpdatingNote, updateNote } = useUpdateNote();
+  const titleRef = useRef();
+
+  useEffect(() => {
+    if (titleRef.current) titleRef.current.focus();
+  }, []);
 
   const sumbitHandler = (data) => {
     if (type === "create") {
@@ -94,6 +99,7 @@ export default function NoteForm({ close, type = "create", defVals, noteId }) {
         {type === "create" ? "Add New Note" : "Update Note"}
       </h2>
       <AppInput
+        ref={titleRef}
         title="title"
         register={register("title", {
           required: "Title is required",
@@ -120,6 +126,7 @@ export default function NoteForm({ close, type = "create", defVals, noteId }) {
         watch={watch}
         isGettingCategories={isGettingCategories}
         defaultSelectedCategories={defVals?.selectedCategories}
+        reset={reset}
       />
       <AppButton disabled={!allowSubmit || isCreatingNote || isUpdatingNote}>
         {type === "create" ? "Create" : "Update"}
