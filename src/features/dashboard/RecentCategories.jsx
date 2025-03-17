@@ -24,13 +24,14 @@ export default function RecentCategories() {
         <div className="w-full grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {categories.length === 0 && <div>No notes found</div>}
           {categories.map((note) => (
-            <div
+            <Link
+              to={`/categories/${note.id}`}
               key={note.id}
-              className="bg-white p-4 rounded-lg shadow-md w-full"
+              className="bg-white p-4 rounded-lg shadow-md w-full hover:shadow-primary hover:shadow-lg"
             >
               <h2 className="text-xl font-semibold">{note.title}</h2>
               <p className="text-sm text-gray-500">{note.description}</p>
-            </div>
+            </Link>
           ))}
         </div>
       )}

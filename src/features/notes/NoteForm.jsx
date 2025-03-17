@@ -93,10 +93,21 @@ export default function NoteForm({ close, type = "create", defVals, noteId }) {
       <h2 className="text-xl font-semibold">
         {type === "create" ? "Add New Note" : "Update Note"}
       </h2>
-      <AppInput title="title" register={register("title")} />
-      <AppInput title="description" register={register("description")} />
+      <AppInput
+        title="title"
+        register={register("title", {
+          required: "Title is required",
+        })}
+        error={formState.errors.title?.message}
+      />
+      <AppInput
+        title="description"
+        type="textarea"
+        register={register("description")}
+      />
       <AppInput
         title="Additional Info"
+        type="textarea"
         register={register("additional_info")}
       />
       <CategoriesSelector

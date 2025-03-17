@@ -11,6 +11,11 @@ export const signup = async ({ username, password }) => {
     return response.data;
 };
 
+export const logout = async () => {
+    const response = await client.post("/auth/logout");
+    return response.data;
+};
+
 export const refreshTokens = async () => {
     const response = await client.post("/refresh");
     return response.data;
