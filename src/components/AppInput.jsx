@@ -32,24 +32,6 @@ const AppInput = forwardRef(
             />
           ) : type === "password" ? (
             <div className="relative">
-              <button
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer"
-                type="button"
-              >
-                {pwType === "password" ? (
-                  <EyeClosed
-                    onClick={() => {
-                      setPwType("text");
-                    }}
-                  />
-                ) : (
-                  <Eye
-                    onClick={() => {
-                      setPwType("password");
-                    }}
-                  />
-                )}
-              </button>
               <input
                 name={title}
                 {...register}
@@ -70,6 +52,24 @@ const AppInput = forwardRef(
                 } focus:outline-none`}
                 type={pwType}
               />
+              <button
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                type="button"
+              >
+                {pwType === "password" ? (
+                  <EyeClosed
+                    onClick={() => {
+                      setPwType("text");
+                    }}
+                  />
+                ) : (
+                  <Eye
+                    onClick={() => {
+                      setPwType("password");
+                    }}
+                  />
+                )}
+              </button>
             </div>
           ) : (
             <input
