@@ -1,24 +1,7 @@
-import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export default function SortBy() {
   const [searchParams, setSearchParams] = useSearchParams();
-  //   useEffect(() => {
-  //     console.log("SortBy");
-  //     if (!searchParams.get("sortBy") && !searchParams.get("orderBy")) {
-  //       console.log("No Both");
-  //       searchParams.set("sortBy", "Date");
-  //       searchParams.set("orderBy", "DESC");
-  //       setSearchParams(searchParams);
-  //     } else if (!searchParams.get("sortBy")) {
-  //       console.log("No Sort");
-  //       searchParams.set("sortBy", "Date");
-  //       setSearchParams(searchParams);
-  //     } else if (!searchParams.get("orderBy")) {
-  //       searchParams.set("orderBy", "DESC");
-  //       setSearchParams(searchParams);
-  //     }
-  //   }, [searchParams, setSearchParams]);
 
   function setSortBy(value) {
     const [sortBy, orderBy] = value.split(" ");

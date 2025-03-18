@@ -21,11 +21,10 @@ export default function AddCategory({
   const handleCategoryAdd = () => {
     createCategory(
       {
-        category: newCategory,
+        category: newCategory.trim(),
       },
       {
         onSuccess: (data) => {
-          console.log(data);
           reset({ newCategory: "" });
           setSelectedCategories((state) => [...state, data]);
           setAllowSubmit(true);

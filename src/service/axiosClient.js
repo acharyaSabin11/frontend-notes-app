@@ -43,7 +43,6 @@ function createAxiosResponseInterceptor() {
             client.interceptors.response.eject(interceptor);
             try {
                 const response = await client.post("/refresh");
-                console.log(response.status);
                 if (response.status === 200) {
                     store.dispatch(handleLogin(response.data));
                     error.response.config.headers["Authorization"] = `Bearer ${response.data.accessToken}`;

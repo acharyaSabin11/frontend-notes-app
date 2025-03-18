@@ -21,7 +21,7 @@ export default function CategoryForm({
     if (type === "create") {
       createCategory(
         {
-          category: data.title,
+          category: data.title.trim(),
         },
         {
           onSuccess: () => {

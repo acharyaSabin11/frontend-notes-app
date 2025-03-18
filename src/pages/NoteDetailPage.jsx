@@ -57,7 +57,6 @@ export default function NoteDetailPage() {
           disabled={isDeleting}
           onClick={() => {
             {
-              console.log("Edit button clicked");
               setModelOpen(true);
             }
           }}

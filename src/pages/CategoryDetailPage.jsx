@@ -60,7 +60,6 @@ export default function CategoryDetailPage() {
           disabled={isDeleting}
           onClick={() => {
             {
-              console.log("Edit button clicked");
               setModelOpen(true);
             }
           }}

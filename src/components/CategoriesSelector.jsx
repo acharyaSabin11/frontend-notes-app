@@ -17,7 +17,6 @@ export default function CategoriesSelector({
   const [selectedCategories, setSelectedCategories] = useState([]);
 
   useEffect(() => {
-    console.log(defaultSelectedCategories);
     if (defaultSelectedCategories) {
       setSelectedCategories(defaultSelectedCategories);
     }

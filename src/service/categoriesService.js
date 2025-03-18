@@ -33,7 +33,6 @@ export const getCategories = async () => {
         console.log(response);
         throw new Error("Something went wrong");
     }
-    console.log(response);
     return response.data.categories ?? [];
 }
 

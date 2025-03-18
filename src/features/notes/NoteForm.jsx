@@ -38,7 +38,6 @@ export default function NoteForm({ close, type = "create", defVals, noteId }) {
         }
       );
     } else if (type === "update") {
-      console.log(data);
       const changeObject = {};
       if (data.title !== defVals.title) {
         changeObject.title = data.title;
@@ -63,7 +62,6 @@ export default function NoteForm({ close, type = "create", defVals, noteId }) {
       if (categoriesToDelete.length > 0) {
         changeObject.removeCategories = categoriesToDelete.map((c) => c.id);
       }
-      console.log(changeObject);
       if (Object.keys(changeObject).length === 0) {
         toast.error("No changes made");
         return;

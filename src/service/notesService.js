@@ -40,7 +40,6 @@ export const getNoteDetail = async (noteId) => {
 }
 
 export const deleteNote = async (noteId) => {
-    console.log(noteId);
     const response = await client.delete(`/notes/${noteId}`);
 
     if (response.status !== 204) {
